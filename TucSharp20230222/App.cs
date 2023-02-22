@@ -3,16 +3,29 @@
     public string Name { get; set; }
     public DateTime BirthDate { get; set; }
     public string AccountNo { get; set; }
+
+    public virtual int CalculateSalary()
+    {
+        return 0;
+    }
 }
 class HourlyEmplyoee : Employee
 {
     public int HourlySalary { get; set; }
     public int HoursWorked { get; set; }
+    public override int CalculateSalary()
+    {
+        return HourlySalary * HoursWorked;
+    }
 }
 
 class MonthlyEmplyoee : Employee
 {
     public int MonthlySalary { get; set; }
+    public override int CalculateSalary()
+    {
+        return MonthlySalary;
+    }
 }
 
 
@@ -54,10 +67,11 @@ public class App
         list.Add(stefan);
         list.Add(oliver);
 
-        //foreach (var emp in list)
-        //{
-        //    emp.CalculateSalary();
-        //}
+        foreach (var emp in list)
+        {
+            int salary = emp.CalculateSalary();
+            Console.WriteLine( $"{emp.Name} - {salary}");
+        }
 
 
         int c = 12;
