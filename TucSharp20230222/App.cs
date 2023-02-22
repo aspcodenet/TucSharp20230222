@@ -1,7 +1,90 @@
-﻿public class App
+﻿class Employee
 {
+    public string Name { get; set; }
+    public DateTime BirthDate { get; set; }
+    public string AccountNo { get; set; }
+}
+class HourlyEmplyoee : Employee
+{
+    public int HourlySalary { get; set; }
+    public int HoursWorked { get; set; }
+}
+
+class MonthlyEmplyoee : Employee
+{
+    public int MonthlySalary { get; set; }
+}
+
+
+
+
+
+public class App
+{
+    bool Test(ref int c)
+    {
+        c = c + 1;
+        Console.WriteLine($"{c}");
+        return false;
+    }
+
+
+
+
+
     public void Run()
     {
+        var stefan = new MonthlyEmplyoee
+        {
+            AccountNo="123",
+            BirthDate = new DateTime(1972,8,3),
+            MonthlySalary = 15000,
+            Name = "Stefan"
+        };
+        var oliver = new HourlyEmplyoee
+        {
+            AccountNo = "123231",
+            BirthDate = new DateTime(2008, 5, 28),
+            HourlySalary = 20,
+            HoursWorked = 20,
+            Name = "Oliver"
+        };
+
+        var list = new List<Employee>();
+        list.Add(stefan);
+        list.Add(oliver);
+
+        //foreach (var emp in list)
+        //{
+        //    emp.CalculateSalary();
+        //}
+
+
+        int c = 12;
+        Console.WriteLine($"{c}");
+        Test(ref c);
+        Console.WriteLine($"{c}");
+
+        int gissning;
+        while (true)
+        {
+            Console.Write("Ange en siffra");
+            string s = Console.ReadLine();
+            if (int.TryParse(s, out gissning) == false)
+            {
+                Console.WriteLine("Ange ett tal, tack");
+                continue;
+            }
+            
+            
+        }
+        Console.WriteLine($"Du gissade {gissning} ");
+
+
+
+
+
+
         var atm = new Atm();
 
         var a = new Konto();
@@ -27,13 +110,7 @@
             Console.WriteLine("2. Deposit");
             Console.WriteLine("3. Print all accounts");
             int sel = Convert.ToInt32(Console.ReadLine());
-            //if(sel == 3)
-            //{
-            //    foreach (var acc in kontoList)
-            //    {
-            //        Console.WriteLine($"{acc.AccountNo} {acc.Balance} kr");
-            //    }
-            //}
+
             if (sel == 1)
             {
                 Console.WriteLine("Ange kontonummer:");
@@ -50,8 +127,12 @@
                 else if (status == Atm.WithdrawStatus.InvalidAccount)
                     Console.WriteLine("Felaktigt konto");
                 else if (status == Atm.WithdrawStatus.Ok)
+                {
+                    //int newBalance = atm.GetBalance(kontoNr);
                     Console.WriteLine("Uttaget registrerat");
- 
+                    //Console.WriteLine($"New balance is:{newBalance}");
+                }
+
             }
 
         }
