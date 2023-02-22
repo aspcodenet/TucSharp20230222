@@ -36,6 +36,14 @@
                 var belopp = Convert.ToInt32(Console.ReadLine());
 
                 //var konto = Hitta konto med Kontonnummer = kontoNr
+                //var acc = kontoList.First(konto => konto.AccountNo == kontoNr);
+                foreach (var acc in kontoList)
+                {
+                    if (acc.AccountNo == kontoNr)
+                    {
+                        acc.Balance -= belopp;
+                    }
+                }
             }
 
         }
