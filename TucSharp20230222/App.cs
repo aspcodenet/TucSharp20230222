@@ -1,4 +1,6 @@
-﻿class Employee
+﻿using Microsoft.VisualBasic.CompilerServices;
+
+class Employee
 {
     public string Name { get; set; }
     public DateTime BirthDate { get; set; }
@@ -30,23 +32,71 @@ class MonthlyEmplyoee : Employee
 
 
 
+public class Point
+{
+    public int XPos { get; set; }
+    public int YPos { get; set; }
 
+    public Point(int x, int y)
+    {
+        //Console.WriteLine("aaa");
+        XPos = x;
+        YPos = y;
+    }
+}
+
+public class Shape
+{
+    public Point Point { get; set; }
+
+
+    public Shape(Point point)
+    {
+        Point = point;
+    }
+
+    public virtual void Draw()
+    {
+
+    }
+}
+
+
+public class Circle : Shape
+{
+    public int Radius { get; set; }
+
+    public Circle(Point p,int radius)
+        :base(p)
+    {
+        Radius = radius;
+    }
+
+    public override void Draw()
+    {
+       Console.WriteLine($"Ritar Circle på {base.Point.XPos}  {base.Point.YPos} ");
+    }
+}
 
 public class App
 {
-    bool Test(ref int c)
-    {
-        c = c + 1;
-        Console.WriteLine($"{c}");
-        return false;
-    }
-
-
-
-
-
     public void Run()
     {
+        var p = new Point(100,12);
+        var shape = new Shape(p);
+
+        var circle = new Circle( new Point(4,2), 10);
+
+        var listShapes = new List<Shape>();
+        listShapes.Add(shape);
+        listShapes.Add(circle);
+
+        foreach (var s in listShapes)
+        {
+            s.Draw();
+        }
+
+
         var stefan = new MonthlyEmplyoee
         {
             AccountNo="123",
